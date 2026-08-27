@@ -19,6 +19,7 @@ const target = process.argv[2] || "http://127.0.0.1:4173/";
 const prefix = target.includes("pear.no") ? "pear-original" : "pear-scroll";
 await page.goto(target, { waitUntil: "domcontentloaded" });
 await page.waitForTimeout(2500);
+await page.waitForFunction(() => !document.querySelector(".boot"), { timeout: 90000 });
 const metrics = await page.evaluate(() => ({
   scrollHeight: document.documentElement.scrollHeight,
   viewport: innerHeight,
