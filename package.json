@@ -1,0 +1,14 @@
+{
+  "name": "pear-no-local-clone",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build && mkdir -p dist/films dist/art && cp -R films/. dist/films/ && cp -R art/. dist/art/ && cp og.jpg dist/og.jpg",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.1",
+    "vite": "^7.1.3"
+  }
+}
