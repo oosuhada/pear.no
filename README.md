@@ -4,7 +4,7 @@
 
 And wherever it appeared, the same false claim followed:
 
-> “Claude Code can’t do this.”
+<p align="center"><strong>“Claude Code can’t do this.”</strong></p>
 
 <p align="center">
   <img src="docs/media/claude-code-cant-do-this.jpg" width="504" alt="Viral social post making the false claim that Claude Code cannot create the Pear website experience">
@@ -20,7 +20,7 @@ So this repository is the answer:
   <img src="docs/media/pear-scroll-demo.webp" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
 </p>
 
-[Live reconstruction](https://oosuhada.github.io/pear.no/)
+<p align="center"><a href="https://oosuhada.github.io/pear.no/">Live reconstruction</a></p>
 
 ## From prompt to production
 
