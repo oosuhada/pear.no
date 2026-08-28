@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build && mkdir -p dist/films dist/art && cp -R films/. dist/films/ && cp -R art/. dist/art/ && cp og.jpg dist/og.jpg",
+    "build:packs": "node scripts/build-frame-packs.mjs",
+    "build": "npm run build:packs && vite build && mkdir -p dist/films dist/art && cp -R films/. dist/films/ && cp -R art/. dist/art/ && cp og.jpg dist/og.jpg",
     "preview": "vite preview --host 0.0.0.0"
   },
   "devDependencies": {
