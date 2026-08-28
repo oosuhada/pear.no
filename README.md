@@ -1,8 +1,14 @@
 # CLAUDE CODE CAN DO THIS.
 
-People kept posting [pear.no](https://pear.no/) with the same caption:
+[pear.no](https://pear.no/) went viral as “the coolest website on the internet.”
+
+And wherever it appeared, the same claim followed:
 
 > “Claude Code can’t do this.”
+
+<p align="center">
+  <img src="docs/media/claude-code-cant-do-this.jpg" width="720" alt="Viral social post claiming Claude Code cannot create the Pear website experience">
+</p>
 
 But Pear publicly described its production stack as GPT Image 2 stills, Seedance 2 films, and Fable 5 in Claude Code. No Figma.
 
@@ -10,11 +16,15 @@ So this repository is the answer:
 
 ## Claude Code can actually do this.
 
-[Live reconstruction](https://oosuhada.github.io/pear.no/) · [Original website](https://pear.no/)
+[Live reconstruction](https://oosuhada.github.io/pear.no/)
 
 <p align="center">
-  <img src="docs/media/claude-code-cant-do-this.jpg" width="504" alt="Social post claiming Claude Code cannot create the Pear website experience">
+  <a href="docs/media/pear-scroll-demo.mp4">
+    <img src="docs/media/pear-scroll-demo.gif" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
+  </a>
 </p>
+
+[Watch the full-quality recording](docs/media/pear-scroll-demo.mp4)
 
 ## From prompt to production
 
