@@ -18,8 +18,8 @@ Except Pear had already posted their own build notes: GPT Image 2 for stills, Se
 </p>
 
 <br/>
-<p align="center"><a href="https://oosuhada.github.io/pear.no/"><strong>Live Reconstruction</strong></a></p>
-<br/>
+<p align="center"><a href="https://oosuhada.github.io/pear.no/"><strong>Live Reconstruction</strong></a></p><br/>
+
 | The claim | This repo |
 |---|---|
 | "Claude Code can't do this" | You're scrolling through it right now |
@@ -33,6 +33,8 @@ Except Pear had already posted their own build notes: GPT Image 2 for stills, Se
 </p>
 
 Same shape as Pear's own pipeline: an image model paints the stills, a video model sets them in motion, and Claude Code assembles and ships the site — no handoff to a design tool in the middle.
+
+<br/>
 
 ## Why bother
 
