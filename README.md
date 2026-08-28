@@ -9,7 +9,7 @@
 
 Except Pear had already posted their own build notes: GPT Image 2 for stills, Seedance 2 for motion, and Fable 5 running inside Claude Code — with the specific detail that no Figma file was ever opened. Nobody checked before hitting repost.
 
-## The rebuttal, in repo form
+## Receipts, Not Arguments
 
 <p align="center">
   <img src="docs/media/pear-scroll-demo.webp" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
