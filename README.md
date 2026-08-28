@@ -25,7 +25,9 @@ Except Pear had already posted their own build notes: GPT Image 2 for stills, Se
 | "Claude Code can't do this" | You're scrolling through it right now |
 | "No Figma file exists" | Still doesn't |
 | Cinematic, scroll-driven WebGL | Preserved — plus a rebuilt loading / frame-delivery pipeline for a smoother scroll |
+
 <br/>
+
 ## From prompt to production
 
 <p align="center">
