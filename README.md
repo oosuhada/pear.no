@@ -1,14 +1,7 @@
 # "Claude Code Can't Do This."
 ### Yeah, about that.
 
-<p align="center">
-  <a href="https://oosuhada.github.io/pear.no/"><strong>Live Reconstruction</strong></a> ·
-  <a href="https://pear.no/">Original (pear.no)</a>
-</p>
-
-[pear.no](https://pear.no/) went viral as *"the coolest website on the internet."* Riding along with every repost was the same confident verdict:
-
-<p align="center"><strong>"Claude Code can't do this."</strong></p>
+[pear.no](https://pear.no/) went viral as *"the coolest website on the internet."* Riding along with every repost was the same confident verdict: **"Claude Code can't do this."**
 
 <p align="center">
   <img src="docs/media/claude-code-cant-do-this.jpg" width="504" alt="Viral social post making the false claim that Claude Code cannot create the Pear website experience">
@@ -21,6 +14,8 @@ Except Pear had already posted their own build notes: GPT Image 2 for stills, Se
 <p align="center">
   <img src="docs/media/pear-scroll-demo.webp" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
 </p>
+
+<p align="center"><a href="https://oosuhada.github.io/pear.no/"><strong>Live Reconstruction</strong></a></p>
 
 | The claim | This repo |
 |---|---|
