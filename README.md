@@ -17,7 +17,7 @@ So this repository is the answer:
 ## Claude Code can actually do this.
 
 <p align="center">
-  <img src="docs/media/pear-scroll-demo.gif" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
+  <img src="docs/media/pear-scroll-demo.webp" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
 </p>
 
 [Live reconstruction](https://oosuhada.github.io/pear.no/)
