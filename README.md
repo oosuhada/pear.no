@@ -9,20 +9,23 @@
 
 Except Pear had already posted their own build notes: GPT Image 2 for stills, Seedance 2 for motion, and Fable 5 running inside Claude Code — with the specific detail that no Figma file was ever opened. Nobody checked before hitting repost.
 
+<br/>
+
 ## Receipts, Not Arguments
 
 <p align="center">
   <img src="docs/media/pear-scroll-demo.webp" width="960" alt="Full-page scroll recording of the live Pear reconstruction">
 </p>
 
+<br/>
 <p align="center"><a href="https://oosuhada.github.io/pear.no/"><strong>Live Reconstruction</strong></a></p>
-
+<br/>
 | The claim | This repo |
 |---|---|
 | "Claude Code can't do this" | You're scrolling through it right now |
 | "No Figma file exists" | Still doesn't |
 | Cinematic, scroll-driven WebGL | Preserved — plus a rebuilt loading / frame-delivery pipeline for a smoother scroll |
-
+<br/>
 ## From prompt to production
 
 <p align="center">
