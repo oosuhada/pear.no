@@ -52,12 +52,12 @@
     );
     await Promise.all(staleCaches.map((name) => caches.delete(name)));
 
-    const resources = [
-      ...manifest.tiers[tier].packs,
-      ...manifest.shared,
-    ];
-    const totalBytes = resources.reduce((sum, item) => sum + item.size, 0);
+    const resources = [...manifest.tiers[tier].packs, ...manifest.shared];
+    const criticalResources = resources.filter((item) => item.phase === "critical");
+    const detailResources = resources.filter((item) => item.phase !== "critical");
+    const totalBytes = criticalResources.reduce((sum, item) => sum + item.size, 0);
     let loadedBytes = 0;
+    let trackingProgress = true;
 
     async function cacheResource(item) {
       document.documentElement.dataset.pearPreloadCurrent = item.url;
@@ -80,7 +80,9 @@
           if (done) break;
           chunks.push(value);
           received += value.byteLength;
-          update(loadedBytes + Math.min(received, item.size), totalBytes);
+          if (trackingProgress) {
+            update(loadedBytes + Math.min(received, item.size), totalBytes);
+          }
         }
       } else {
         chunks.push(new Uint8Array(await response.arrayBuffer()));
@@ -103,17 +105,21 @@
         }),
       ).catch((error) => console.warn("Pear cache write skipped.", error));
       loadedBytes += item.size;
-      update(loadedBytes, totalBytes);
+      if (trackingProgress) update(loadedBytes, totalBytes);
     }
 
-    let cursor = 0;
-    const workers = Array.from({ length: 6 }, async () => {
-      while (cursor < resources.length) {
-        const item = resources[cursor++];
-        await cacheResource(item);
-      }
-    });
-    await Promise.all(workers);
+    async function loadResources(items, concurrency) {
+      let cursor = 0;
+      const workers = Array.from({ length: concurrency }, async () => {
+        while (cursor < items.length) {
+          const item = items[cursor++];
+          await cacheResource(item);
+        }
+      });
+      await Promise.all(workers);
+    }
+
+    await loadResources(criticalResources, 6);
 
     worker?.postMessage({
       type: "ASSETS_READY",
@@ -121,6 +127,25 @@
       version: manifest.version,
       tier,
     });
+
+    state.progress = 1;
+    state.done = true;
+    document.documentElement.dataset.pearPreload = "100";
+    document.documentElement.dataset.pearPreloadDone = "true";
+    window.dispatchEvent(new Event("pearpreloadcomplete"));
+
+    trackingProgress = false;
+    const beginDetailLoad = () => loadResources(detailResources, 3)
+      .then(() => {
+        state.detailDone = true;
+        document.documentElement.dataset.pearDetailDone = "true";
+      })
+      .catch((error) => console.warn("Pear detail preload paused.", error));
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(beginDetailLoad, { timeout: 1200 });
+    } else {
+      setTimeout(beginDetailLoad, 300);
+    }
   })()
     .catch((error) => {
       console.warn("Pear compressed preload fell back to direct loading.", error);
@@ -128,10 +153,12 @@
       document.documentElement.dataset.pearPreloadError = state.error;
     })
     .finally(() => {
-      state.progress = 1;
-      state.done = true;
-      document.documentElement.dataset.pearPreload = "100";
-      document.documentElement.dataset.pearPreloadDone = "true";
-      window.dispatchEvent(new Event("pearpreloadcomplete"));
+      if (!state.done) {
+        state.progress = 1;
+        state.done = true;
+        document.documentElement.dataset.pearPreload = "100";
+        document.documentElement.dataset.pearPreloadDone = "true";
+        window.dispatchEvent(new Event("pearpreloadcomplete"));
+      }
     });
 })();

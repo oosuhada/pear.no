@@ -9,14 +9,14 @@ const outputRoot = path.join(projectRoot, "public", "packs");
 const regularSequences = ["flysky", "trans", "plan", "tree", "coda"];
 const modelSequences = ["v28", "v51", "v61", "renaissance"];
 const sharedAssets = [
-  "films/reveal.mp4",
-  "films/reveal-poster.jpg",
-  "films/signal.mp4",
-  "films/signal-poster.jpg",
-  "films/colossus.mp4",
-  "films/colossus-poster.jpg",
-  "films/footer-loop.mp4",
-  "art/scaffold_expand.jpg",
+  ["films/reveal.mp4", true],
+  ["films/reveal-poster.jpg", true],
+  ["art/scaffold_expand.jpg", true],
+  ["films/signal.mp4", false],
+  ["films/signal-poster.jpg", false],
+  ["films/colossus.mp4", false],
+  ["films/colossus-poster.jpg", false],
+  ["films/footer-loop.mp4", false],
 ];
 
 const toWebPath = (value) => value.split(path.sep).join("/");
@@ -26,8 +26,8 @@ async function listFrames(directory) {
   return names.filter((name) => name.endsWith(".webp")).sort();
 }
 
-async function makePack(tier, name, directory) {
-  const names = await listFrames(directory);
+async function makePack(tier, name, phase, directory, select) {
+  const names = (await listFrames(directory)).filter(select);
   const chunks = [];
   const entries = [];
   let offset = 0;
@@ -43,12 +43,13 @@ async function makePack(tier, name, directory) {
 
   const payload = Buffer.concat(chunks);
   const digest = createHash("sha256").update(payload).digest("hex").slice(0, 12);
-  const filename = `${tier}-${name}-${digest}.pack`;
+  const filename = `${tier}-${name}-${phase}-${digest}.pack`;
   await fs.writeFile(path.join(outputRoot, filename), payload);
 
   return {
     url: `packs/${filename}`,
     size: payload.length,
+    phase,
     entries,
   };
 }
@@ -59,23 +60,15 @@ async function buildTier(tier) {
   const modelSubdirectory = tier === "mobile" ? "768" : "1440";
 
   for (const name of regularSequences) {
-    packs.push(
-      await makePack(
-        tier,
-        name,
-        path.join(filmsRoot, name, regularSubdirectory),
-      ),
-    );
+    const directory = path.join(filmsRoot, name, regularSubdirectory);
+    packs.push(await makePack(tier, name, "critical", directory, (_, index) => index % 8 === 0));
+    packs.push(await makePack(tier, name, "detail", directory, (_, index) => index % 8 !== 0));
   }
 
   for (const name of modelSequences) {
-    packs.push(
-      await makePack(
-        tier,
-        `model-${name}`,
-        path.join(filmsRoot, "model", name, modelSubdirectory),
-      ),
-    );
+    const directory = path.join(filmsRoot, "model", name, modelSubdirectory);
+    packs.push(await makePack(tier, `model-${name}`, "critical", directory, (_, index) => index % 8 === 0));
+    packs.push(await makePack(tier, `model-${name}`, "detail", directory, (_, index) => index % 8 !== 0));
   }
 
   return packs;
@@ -90,9 +83,10 @@ const [desktopPacks, mobilePacks] = await Promise.all([
 ]);
 
 const shared = await Promise.all(
-  sharedAssets.map(async (url) => ({
+  sharedAssets.map(async ([url, critical]) => ({
     url,
     size: (await fs.stat(path.join(projectRoot, url))).size,
+    phase: critical ? "critical" : "detail",
   })),
 );
 
