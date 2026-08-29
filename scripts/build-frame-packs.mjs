@@ -6,13 +6,12 @@ const projectRoot = process.cwd();
 const filmsRoot = path.join(projectRoot, "films");
 const outputRoot = path.join(projectRoot, "public", "packs");
 
-const regularSequences = ["flysky", "trans", "tree", "coda"];
+const regularSequences = ["flysky", "trans", "plan", "tree", "coda"];
 const modelSequences = ["v28", "v51", "v61", "renaissance"];
 const sharedAssets = [
   ["films/reveal.mp4", true],
   ["films/reveal-poster.jpg", true],
   ["art/scaffold_expand.jpg", true],
-  ["films/plan.mp4", true],
   ["films/signal.mp4", false],
   ["films/signal-poster.jpg", false],
   ["films/colossus.mp4", false],
