@@ -56,14 +56,10 @@ async function makePack(tier, name, phase, directory, select) {
 
 async function buildTier(tier) {
   const packs = [];
+  const regularSubdirectory = tier === "mobile" ? "768" : "";
   const modelSubdirectory = tier === "mobile" ? "768" : "1440";
 
   for (const name of regularSequences) {
-    const regularSubdirectory = tier === "mobile"
-      ? "768"
-      : name === "plan"
-        ? "960"
-        : "";
     const directory = path.join(filmsRoot, name, regularSubdirectory);
     packs.push(await makePack(tier, name, "critical", directory, (_, index) => index % 8 === 0));
     packs.push(await makePack(tier, name, "detail", directory, (_, index) => index % 8 !== 0));
